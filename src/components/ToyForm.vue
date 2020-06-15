@@ -1,0 +1,57 @@
+
+  <template>
+  <div class="text-center">
+    <v-dialog
+      :value="showForm"
+      width="500"
+      
+    >
+    <v-card>
+    <v-card-title
+        class="headline grey lighten-2"
+        primary-title
+    >
+        Privacy Policy
+    </v-card-title>
+
+    <v-card-text>
+        
+    </v-card-text>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+        <v-spacer></v-spacer>
+        <v-btn
+        color="primary"
+        text
+        @click="submitForm"
+        >
+        I accept
+        </v-btn>
+    </v-card-actions>
+    </v-card>
+    </v-dialog>
+  </div>
+</template>
+
+
+<script>
+import {mapState, mapActions} from 'vuex'
+export default {
+    methods: {
+        ...mapActions(['hideToyForm']),
+        submitForm(){
+            this.hideToyForm()
+        }
+    },
+    computed: {
+        ...mapState(['showForm'])
+    }
+
+}
+</script>
+
+<style>
+
+</style>
