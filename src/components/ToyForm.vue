@@ -4,6 +4,7 @@
     <v-dialog
       :value="showForm"
       width="500"
+      persistent
       
     >
     <v-card>
@@ -14,21 +15,19 @@
         Privacy Policy
     </v-card-title>
 
-    <v-card-text>
-        
-    </v-card-text>
+
+    <v-text-field label="nombre" type="text" :value="currentToy.data.name" @input="updateName"/>
+    <v-text-field label="precio" prefix="$" :value="currentToy.data.price" @input="updatePrice"/>
+    <v-text-field label="codigo" type="text" :value="currentToy.data.code" @input="updateCode"/>
+    <v-text-field label="stock" suffix="Unidades" :value="currentToy.data.stock" @input="updateStock"/>
+
+    
 
     <v-divider></v-divider>
 
     <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
-        color="primary"
-        text
-        @click="submitForm"
-        >
-        I accept
-        </v-btn>
+        <v-btn color="primary" text @click="submitForm">I accept</v-btn>
     </v-card-actions>
     </v-card>
     </v-dialog>
@@ -40,13 +39,14 @@
 import {mapState, mapActions} from 'vuex'
 export default {
     methods: {
-        ...mapActions(['hideToyForm']),
+        ...mapActions(['hideToyForm', 'updateName', 'updatePrice', 'updateCode', 'updateStock', 'postToy']),
         submitForm(){
+            this.postToy()
             this.hideToyForm()
         }
     },
     computed: {
-        ...mapState(['showForm'])
+        ...mapState(['showForm', 'currentToy'])
     }
 
 }
