@@ -1,9 +1,12 @@
 <template>
-  <div class="container mt-16">
+  <div class="container">
     <app-bar/>
     <v-main>
-     <v-btn @click="displayToyForm">Nuevo Juguete</v-btn>
+      <v-overlay :value="loading">
+        <v-progress-circular indeterminate size="64"/>
+      </v-overlay>
     <toys-list/>
+     <v-btn @click="displayToyForm" color="deep-orange lighten-3 white--text" class="mx-auto mt-6">Nuevo Juguete</v-btn>
     <toy-form/>
     </v-main>
   </div>
@@ -13,7 +16,7 @@
 import AppBar from '../components/AppBar'
 import ToysList from '../components/ToysList'
 import ToyForm from '../components/ToyForm'
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 
 
@@ -25,6 +28,9 @@ export default {
   },
   methods: {
     ...mapActions(['displayToyForm'])
+  },
+  computed:{
+    ...mapState(['loading'])
   }
 }
 </script>

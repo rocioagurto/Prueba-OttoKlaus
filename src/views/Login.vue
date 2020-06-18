@@ -25,7 +25,7 @@
       <v-card-actions>
       <v-spacer></v-spacer>
         <v-content>
-          <v-btn color="teal lighten-3 white--text" 
+          <v-btn color="cyan lighten-3 white--text" 
           width="450" 
           class="my-3" 
           @click="login"

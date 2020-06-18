@@ -12,17 +12,15 @@ router.get("/toy/:id", async (req, res) => {
     .doc(req.params.id)
     .get().then((doc) => {
     if (doc.exists) {
-      console.log("Document data:", doc.data());
-      return doc.data()
-    } 
-    else {
-      console.log("No such document!");
-      return {}
+        console.log("Document data:", doc.data());
+        return { id: doc.id, data: doc.data() }
+    } else {
+        console.log("No such document!");
+        return {}
     }
   });
   res.send(toy);
 });
-
 router.get("/toys", async (req, res) => {
   const toys = await admin
     .firestore()
@@ -34,33 +32,32 @@ router.get("/toys", async (req, res) => {
   });
   res.send(lista);
 });
-
 router.post("/toy", async (req, res) => {
-  await admin
-  .firestore()
-  .collection("toys")
-  .add(req.body)
-  res.send(req.body);
+  const toy = await admin
+    .firestore()
+    .collection("toys")
+    .add(req.body)
+    .then(docRef => {
+      return docRef.id
+    });
+  res.send(toy);
 });
-
 router.put("/toy/:id", async (req, res) => {
   const toy = await admin
-  .firestore()
-  .collection("toys")
-  .doc(req.params.id)
-  .update(req.body).then((doc) => {
+    .firestore()
+    .collection("toys")
+    .doc(req.params.id)
+    .update(req.body).then((doc) => {
     if (doc.exists) {
-      console.log("Document data:", doc.data());
-      return doc.data()
-    } 
-    else {
-      console.log("No such document!");
-      return {}
+        console.log("Document data:", doc.data());
+        return doc.data()
+    } else {
+        console.log("No such document!");
+        return {}
     }
   });
   res.send(toy);
 });
-
 router.delete("/toy/:id", async (req, res) => {
   const toy = await admin
     .firestore()

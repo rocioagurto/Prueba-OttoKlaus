@@ -2,7 +2,7 @@
   <div>
    <v-app-bar
     app
-    color="teal lighten-3"
+    color="cyan lighten-3"
     dark
   >
     <div class="d-flex align-center">
